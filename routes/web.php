@@ -16,8 +16,8 @@ use App\Http\Controllers\ListarController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->middleware('auth');
 
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth');
 Route::get('/listar', [ListarController::class, 'index'])->middleware('auth');
@@ -25,7 +25,7 @@ Route::post('/home/submit', [HomeController::class, 'formSubmit']);
 Route::delete('/deletar/{id}', [HomeController::class, 'destroy'])->middleware('auth');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('home');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
