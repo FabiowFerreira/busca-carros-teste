@@ -14,7 +14,7 @@ class AddUserIdToCarrosTable extends Migration
     public function up()
     {
         Schema::table('carros', function (Blueprint $table) {
-            //
+            $table->foreignId('user_id')->contrained();
         });
     }
 
@@ -26,7 +26,9 @@ class AddUserIdToCarrosTable extends Migration
     public function down()
     {
         Schema::table('carros', function (Blueprint $table) {
-            //
+            $table->foreignId('user_id')
+            ->constrained()
+            ->onDelete('cascade');
         });
     }
 }

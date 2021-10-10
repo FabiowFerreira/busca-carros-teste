@@ -114,13 +114,10 @@ class HomeController extends Controller
             array_push($carrosArray,$carroArray);
 
 
-            
-        }
-
-        //salvar no BD
-        $carro = new Carro;
-
-        $carro->nome_veiculo = $carroNome;
+            //salvar no BD
+            $carro = new Carro;
+    
+            $carro->nome_veiculo = $carroNome;
             $carro->link = $carroLink;
             $carro->ano = $carroAno;
             $carro->combustivel = $carroCombustivel;
@@ -128,13 +125,16 @@ class HomeController extends Controller
             $carro->quilometragem = $carroKm;
             $carro->cambio = $carroCambio;
             $carro->cor = $carroCor;
-
-        $user = auth()->user();
-        $carro->user_id = $user->id;
-
-        $carro->save();
+    
+            $user = auth()->user();
+            $carro->user_id = $user->id;
+    
+            $carro->save();
+            
+        }
+        
+        
         dd($carrosArray);
-
         return redirect('/home')->with('msg','caiu na function : '.trim($url).trim($c1));
     }
 
