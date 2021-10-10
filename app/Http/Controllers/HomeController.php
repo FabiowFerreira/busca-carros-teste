@@ -170,5 +170,13 @@ class HomeController extends Controller
         return redirect('/home')->with('delete_ok','Carro: '.trim($findResult->nome_veiculo).' deletado com sucesso.');
     }
 
+    public function destroyAll(){
+
+        Carro::truncate();
+
+        return redirect('/home')->with('delete_ok','Todos os dados foram deletados com sucesso.');
+
+    }
+
 }
 

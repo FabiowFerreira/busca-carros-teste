@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">    
 </head>
 
 <body>
@@ -33,6 +33,13 @@
                     <th scope="col">Cor</th>
                     <th scope="col">Link</th>
                     <th scope="col">Preço</th>
+                    <th scope="col">
+                    <form action="/deletar/all" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Todos os dados serão removidos. Deseja continuar?')" class="btn btn-danger delete-btn"><i class="fa fa-exclamation-triangle"></i>Deletar Todos</button>
+                        </form>
+                    </th>
                 </tr>
             </thead>
             <tbody>
