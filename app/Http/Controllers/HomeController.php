@@ -22,26 +22,31 @@ class HomeController extends Controller
 
         $url = file_get_contents('https://www.questmultimarcas.com.br/estoque?termo='.trim($termo));
 
-        preg_match_all('/<article[\s\S]*?article>/im',$url,$array);
+        preg_match_all('/<article[\s\S]*?article>/im',$url,$array);       
 
         
         if(count($array[0]) > 0){
-
             foreach($array[0] as $el1){
                 $el1 = strval($el1);
     
+                //link do article
                 preg_match('/www.[\s\S]*?\/\d{4}\/\d{1,}/',$el1,$carroLink);
                 $carroLink = $carroLink[0];
     
+                //nome do article
                 preg_match('/[A-Z][\s\S]*?</',$el1,$carroNome);
                 $carroNome = $carroNome[0];
+
+                //pegando o preço do article
+                preg_match('/#\d*;\s\d*.\d{3}/m',$el1,$carroPreco);
+                preg_match('/\d*\.\d{3}/m',$carroPreco[0],$carroPrecoCorreto);
+                $carroPrecoCorreto = $carroPrecoCorreto[0];
                 
                 preg_match('/<!-- Car Details -->[\s\S]*?Car Details -->/im',$el1,$details);
                 
                 $detailsString = strval($details[0]);
                 
-                // dd($detailsString);
-                
+                // dd($detailsString);                
                 
                 preg_match_all('/<li[\s\S]*?li>/im',$detailsString,$liArray);
                 
@@ -55,7 +60,7 @@ class HomeController extends Controller
                 
                 $liPortas = strval($liArray[0][4]);
                 
-                $liCor = strval($liArray[0][5]);
+                $liCor = strval($liArray[0][5]); 
                 
                 
                 //pegando o ano do primeiro article
@@ -108,12 +113,16 @@ class HomeController extends Controller
     
                 //pegando cor do article
                 preg_match('/[A-Z][a-z]*\s/m',$liCor,$carroCor);
+
+                if(count($carroCor) < 1){
+                    $carroCor[0] = 'Várias Cores';
+                }
     
                 $carroCor = $carroCor[0];
     
                 $carroArray = array($carroAno,$carroKm,$carroCombustivel,$carroCambio,$carroPortas,$carroCor,$carroLink,$carroNome);
     
-                array_push($carrosArray,$carroArray);
+                array_push($carrosArray,$carroArray);                
     
     
                 //salvar no BD
@@ -127,6 +136,7 @@ class HomeController extends Controller
                 $carro->quilometragem = $carroKm;
                 $carro->cambio = $carroCambio;
                 $carro->cor = $carroCor;
+                $carro->preco = $carroPrecoCorreto;
         
                 $user = auth()->user();
                 $carro->user_id = $user->id;

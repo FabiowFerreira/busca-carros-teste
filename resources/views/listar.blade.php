@@ -32,6 +32,7 @@
                     <th scope="col">Câmbio</th>
                     <th scope="col">Cor</th>
                     <th scope="col">Link</th>
+                    <th scope="col">Preço</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,6 +61,9 @@
                     </td>
                     <td>
                         {{$carro->link}}
+                    </td>
+                    <td>
+                        R$ {{$carro->preco}}
                     </td>
                     <td>
                         <form action="/deletar/{{$carro->id}}" method="POST">

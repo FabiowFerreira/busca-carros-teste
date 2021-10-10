@@ -24,6 +24,7 @@ class CreateCarrosTable extends Migration
             $table->string('quilometragem');
             $table->string('cambio');
             $table->string('cor');
+            $table->string('preco');
         });
     }
 
