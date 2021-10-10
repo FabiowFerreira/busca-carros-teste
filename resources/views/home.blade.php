@@ -21,11 +21,23 @@
     </nav>
 
     @if(session('get_ok'))
+    <div class="alert alert-success alert-dismissible" role="alert">        
+            <i class="fa fa-check-circle"></i>        
+        <span class="tex-success">{{session('get_ok')}}</span>
+    </div>
+    @endif
+
+    @if(session('get_fail'))
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <i class="fa fa-exclamation"></i>
+        <span class="tex-success">{{session('get_fail')}}</span>
+    </div>
+    @endif
+
+    @if(session('delete_ok'))
     <div class="alert alert-success alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert">
-            <i class="fa fa-times"></i>
-        </button>
-        <span class="tex-success">{{session('success')}}</span>
+        <i class="fa fa-check-circle"></i>
+        <span class="tex-success">{{session('delete_ok')}}</span>
     </div>
     @endif
 

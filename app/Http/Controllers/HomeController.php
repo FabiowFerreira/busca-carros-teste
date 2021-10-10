@@ -23,8 +23,9 @@ class HomeController extends Controller
         $url = file_get_contents('https://www.questmultimarcas.com.br/estoque?termo='.trim($termo));
 
         preg_match_all('/<article[\s\S]*?article>/im',$url,$array);
+
         
-        if(count($array) > 0){
+        if(count($array[0]) > 0){
 
             foreach($array[0] as $el1){
                 $el1 = strval($el1);
@@ -149,9 +150,14 @@ class HomeController extends Controller
 
 
     public function destroy($id){
-        Carro::destroy($id);
 
-        return redirect('/home')->with('msg','Carro excluído');
+        $findResult = Carro::find($id);
+        
+        $findResult->delete();
+
+        // Carro::destroy($id);
+
+        return redirect('/home')->with('delete_ok','Carro: '.trim($findResult->nome_veiculo).' deletado com sucesso.');
     }
 
 }
