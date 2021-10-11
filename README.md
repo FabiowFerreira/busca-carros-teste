@@ -13,7 +13,39 @@ Busca Carros Teste executa uma requisição à url https://www.questmultimarcas.
 - PHP 8.0.11
 - [MySql](https://www.mysql.com)
 - Bootstrap
+- Font Awesome
+- Breeze
+- Jetstrap
 
-## 
+## Como executar esse projeto ❓
+### Pré requisitos
+- Servidor Apache
+- Banco de dados MySql
+- Php
+- Composer
+- Node
+### Após clonar:
+1. Renomear .env.example para .env e configurar as variáveis de conexão ao BD de acordo com o seu ambiente.
+2.  
+````bash
+# baixar as dependências com npm
+npm i 
+````
+3.
+````bash
+# atualizar dependências e composer.lock
+composer update
+````
+4.
+````bash
+# setar aplication encrypted key
+php artisan key:generate
+````
+5.
+````bash
+# rodar 
+php artisan serve
+````
+
 
  
